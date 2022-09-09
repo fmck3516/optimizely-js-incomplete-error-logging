@@ -57,7 +57,7 @@ function getResponseFromRequest(request) {
     ...
     response.on('end', function () {
        ...
-        if (400 <= incomingMessage.statusCode <= 599) {
+        if (incomingMessage.statusCode >= 400 && incomingMessage.statusCode <= 599) {
             reject(new Error(JSON.stringify({
                 statusCode: incomingMessage.statusCode,
                 body: responseData,
