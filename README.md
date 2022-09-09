@@ -22,6 +22,15 @@ Errors at application layer (e.g., `HTTP 500 Internal Server Error`) are silentl
  PASS  test/HTTP500.test.js
 ```
 
+The Java SDK [checks for HTTP status codes](https://github.com/optimizely/java-sdk/blob/8b8a9838cfd3824d13e5c472a7d578a4f4d4ed97/core-httpclient-impl/src/main/java/com/optimizely/ab/config/HttpProjectConfigManager.java#L106) and logs HTTP errors:
+```
+2022-09-09T09:05:19,399 c.o.a.c.HttpProjectConfigManager: Error fetching datafile
+org.apache.http.client.ClientProtocolException: unexpected response when trying to fetch datafile, status: 500
+	at com.optimizely.ab.config.HttpProjectConfigManager.getDatafileFromResponse(HttpProjectConfigManager.java:115)
+	...
+```
+
+
 For our applications, it doesn't matter why the retrieval failed. We need observability into all kinds of request errors. 
 Whether they occur at the TCP/IP or HTTP layer. 
 
